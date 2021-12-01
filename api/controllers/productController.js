@@ -6,6 +6,7 @@ const Product = require('../models/productModel')
 
 
 const getProducts = async(req, res, next) => {
+    const products = await Product.find({}).lean()
     res.status(200).json({
         message: 'Handling GET requests to /products'
     })
@@ -27,8 +28,13 @@ const getProduct = async(req, res, next) => {
 }
 
 const createProduct = async(req, res, next) => {
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    }
     res.status(201).json({
-        message: 'new Product created'
+        message: 'new Product created',
+        createdProduct: product
     })
 }
 

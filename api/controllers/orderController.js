@@ -130,8 +130,13 @@ const getOrder = async(req, res, next) => {
 }
 
 const createOrder = async(req, res, next ) => {
+    const order = {
+        productId: req.body.objectId,
+        quantity: req.body.quantity
+    }
     res.status(201).json({
-        message: 'CREATE order'
+        message: 'CREATE order',
+        newOrder: order
     })
 }
 
