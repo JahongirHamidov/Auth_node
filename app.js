@@ -10,7 +10,14 @@ const productRoutes = require('./api/routes/productRoute')
 const orderRoutes = require('./api/routes/orderRoute')
 const userRoutes = require('./api/routes/userRoute')
 
-// mongoose.connect()
+
+
+// Middlewares
+const {
+  internalServerError,
+  notFound
+} = require('./api/middlewares/errorHandler')
+
 
 app.use(helmet())
 app.use(morgan('dev'))
@@ -36,21 +43,10 @@ app.use("/products", productRoutes)
 app.use("/orders", orderRoutes)
 app.use("/user", userRoutes)
 
-app.use( (req, res, next) => {
-  const error = new Error("Not Found")
-  error.status = 404
-  next(error)
-})
 
-
-app.use((error, req, res, next) => {
-  res.status(error.status || 500)
-  res.json({
-    error: {
-      message: error.message
-    }
-  })
-})
+// Middlewares
+app.use(notFound)
+app.use(internalServerError)
 
 
 

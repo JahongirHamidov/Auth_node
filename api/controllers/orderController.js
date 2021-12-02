@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-// const Order = require('../models/orderModel')
-// const Product = require('../models/productModel')
+const Order = require('../models/orderModel')
+const Product = require('../models/productModel')
 
 
 // const getOrders = async(req, res, next) => {
